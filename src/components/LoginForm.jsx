@@ -2,13 +2,14 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+// yup schema to custom error validation
 const signInSchema = Yup.object().shape({
   email: Yup.string()
-    .email()
+    .email() // by default = 'email must be a valid email'
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(4, "Password is too short - should be 4 chars min"),
+    .min(8, "Password is too short - should be 8 chars min"),
 });
 
 const initialValues = {
@@ -43,7 +44,7 @@ const LoginForm = () => {
                   type="email"
                   className={
                     errors.email && touched.email
-                      ? "w-full py-3 mb-2 border border-2 border-red-500 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow "
+                      ? "w-full py-3 mb-2 border border-2 border-red-500 rounded-lg px-3 focus:outline-none focus:border-red-500 hover:shadow "
                       : "w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow "
                   }
                   placeholder="Enter email address"
